@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Contenedor principal */
+  .vendedora-home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #f4f4f4, #e5e5e5);
+  }
+  
+  /* Caja de contenido */
+  .vendedora-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 400px;
+  }
+  
+  /* Texto de bienvenida */
+  .vendedora-box h2 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Menú de botones */
+  .vendedora-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Botones */
+  .vendedora-menu button {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  /* Colores de los botones */
+  .btn-prospectos {
+    background: #1e3a8a;
+    color: white;
+  }
+  
+  .btn-pedidos {
+    background: #16a085;
+    color: white;
+  }
+  
+  .btn-clientes {
+    background: #f39c12;
+    color: white;
+  }
+  
+  .btn-cerrar {
+    background: #c0392b;
+    color: white;
+  }
+  
+  /* Efecto Hover */
+  .vendedora-menu button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  
+  /* Responsividad: Ajustes para pantallas pequeñas */
+  @media (max-width: 600px) {
+    .vendedora-box {
+      width: 90%;
+    }
+  }
+  

@@ -1,0 +1,376 @@
+/* 📌 Contenedor principal */
+.admin-prospectos-page {
+  width: 100% !important;
+  height: calc(100vh - 60px) !important;
+  padding: 24px !important;
+  overflow-y: auto !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06) !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* 📌 Título */
+.admin-prospectos-title {
+  font-size: 28px !important;
+  color: #1f3b5c !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  margin-bottom: 24px !important;
+}
+
+/* 📌 Filtros */
+.admin-prospectos-filtros {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+  gap: 3% !important;
+  padding: 16px 20px !important;
+  background: #f8f9fa !important;
+  border-radius: 12px !important;
+  margin-bottom: 24px !important;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.filtro-grupo {
+  display: flex !important;
+  flex-direction: column !important;
+  font-size: 14px !important;
+}
+
+.filtro-grupo label {
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+  font-size: 13px !important;
+  color: #1f3b5c !important;
+}
+
+.admin-prospectos-filtros select,
+.admin-prospectos-filtros input {
+  font-size: 13px !important;
+  padding: 6px 8px !important;
+  min-height: 34px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  outline: none !important;
+  flex: 1 !important;
+  min-width: 200px !important;
+}
+
+.admin-prospectos-filtros button {
+  padding: 10px 18px !important;
+  background: #0d2a49 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  transition: background 0.3s ease !important;
+}
+
+.admin-prospectos-filtros button:hover {
+  background: #1a3966 !important;
+}
+
+/* 📋 Tabla */
+.admin-prospectos-table-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.admin-prospectos-table {
+  all: unset !important;
+  display: table !important;
+  width: 100% !important;
+  min-width: 1000px;
+  border-collapse: collapse !important;
+  font-size: 16px;
+  margin-top: 20px !important;
+  border-radius: 10px !important;
+  background: white !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03) !important;
+}
+
+.admin-prospectos-table th,
+.admin-prospectos-table td {
+  padding: 6px 8px;
+  border: 1px solid #e0e0e0 !important;
+  text-align: left !important;
+  font-size: 16px;
+}
+
+.admin-prospectos-table th {
+  background: #1f3b5c !important;
+  color: white !important;
+  text-transform: uppercase !important;
+}
+
+.admin-prospectos-table tr:nth-child(even) {
+  background: #f9f9f9 !important;
+}
+
+/* 🛠️ Botones acción */
+.admin-btn-editar,
+.admin-btn-eliminar,
+.admin-btn-seguimientos,
+.admin-btn-abrir-prospeccion {
+  padding: 8px 12px !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  margin: 4px !important;
+  cursor: pointer !important;
+}
+
+.admin-btn-editar {
+  background: #6e94e6 !important;
+  color: black !important;
+}
+
+.admin-btn-eliminar {
+  background: #dc3545 !important;
+  color: white !important;
+}
+
+.admin-btn-seguimientos {
+  background: #1f3b5c !important;
+  color: white !important;
+}
+
+.admin-btn-abrir-prospeccion {
+  background: #2b3b70 !important;
+  color: white !important;
+}
+
+/* ➕ Crear nuevo */
+.admin-btn-nuevo-prospecto {
+  width: 100% !important;
+  margin-top: 20px !important;
+  padding: 14px !important;
+  font-size: 17px !important;
+  background: #007bffbb !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: background 0.3s ease !important;
+}
+
+.admin-btn-nuevo-prospecto:hover {
+  background: #0056b3 !important;
+}
+
+/* 📌 Error */
+.error {
+  color: red !important;
+  font-size: 14px !important;
+  margin-top: 10px !important;
+}
+
+/* 📌 React-Select */
+.select-estado {
+  width: 200px !important;
+}
+
+.select__control {
+  border: 1px solid #ccc !important;
+  border-radius: 5px !important;
+}
+
+.select__option--is-selected {
+  background-color: #10355c !important;
+  color: white !important;
+}
+
+.input-busqueda-nombre {
+  width: 100% !important;
+  max-width: 220px !important;
+  padding: 6px 8px !important;
+  font-size: 13px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  box-sizing: border-box !important;
+}
+
+.btn-toggle-filtros {
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-toggle-filtros:hover {
+  background-color: #574fd6;
+}
+
+/* 🟨 Cards móviles */
+.admin-prospectos-cards-mobile {
+  display: none !important;
+}
+
+
+.skeleton-row {
+  height: 30px;
+  background: linear-gradient(-90deg, #eeeeee 0%, #dddddd 50%, #eeeeee 100%);
+  background-size: 400% 400%;
+  animation: shimmer 1.2s ease-in-out infinite;
+  margin: 10px 0;
+}
+
+.paginador-lindo {
+  margin: 24px auto 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.paginador-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 13px;
+  background: #f4f4f4;
+  padding: 6px 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.btn-paginador {
+  background-color: transparent;
+  color: #1f3b5c;
+  border: none;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-paginador:hover {
+  background-color: #d9e3f0;
+}
+
+.paginador-info {
+  color: #444;
+  font-weight: 500;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-contenido {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+}
+.modal-acciones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+.btn-confirmar {
+  background-color: #27ae60;
+  color: white;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+}
+.btn-cancelar {
+  background-color: #e74c3c;
+  color: white;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+}
+
+
+@media (max-width: 768px) {
+  .admin-prospectos-page {
+    padding: 15px !important;
+  }
+
+  .admin-prospectos-filtros {
+    flex-direction: column !important;
+    gap: 14px !important;
+    padding: 15px !important;
+  }
+
+  .admin-prospectos-filtros select,
+  .admin-prospectos-filtros input {
+    font-size: 13px !important;
+    padding: 8px !important;
+  }
+
+  .admin-prospectos-filtros button {
+    font-size: 13px !important;
+    padding: 8px 12px !important;
+  }
+
+  .admin-btn-nuevo-prospecto {
+    font-size: 16px !important;
+    padding: 10px !important;
+  }
+
+  .admin-prospectos-table {
+    display: none !important;
+  }
+
+  .admin-prospectos-cards-mobile {
+    display: block !important;
+    margin-top: 20px !important;
+  }
+
+  .admin-prospecto-card {
+    background: #ffffff !important;
+    border: 1px solid #ccc !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    margin-bottom: 15px !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .admin-prospecto-card h3 {
+    margin: 0 0 8px 0 !important;
+    font-size: 18px !important;
+    color: #1f3b5c !important;
+  }
+
+  .admin-prospecto-card p {
+    margin: 4px 0 !important;
+    font-size: 14px !important;
+    color: #444 !important;
+  }
+
+  .admin-prospecto-card .acciones {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
+    margin-top: 10px !important;
+  }
+
+  .admin-prospecto-card .acciones button {
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+  }
+}

@@ -1,0 +1,349 @@
+/* 📌 Contenedor Principal */
+.seguimientos-container {
+  width: 100%; /* ✅ Ocupa toda la pantalla */
+  height: calc(90vh - 60px); /* ✅ Ocupa toda la altura menos el navbar */
+  padding: 20px;
+  overflow-y: auto; /* ✅ Permite hacer scroll si hay muchas vendedoras */
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-left: 1%;
+  }
+  
+  /* 📌 Título */
+  h1 {
+    font-size: 26px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* 📌 Contenedor de filtros */
+  .filtros-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* 📌 Estilos del selector */
+  .filtros-container .css-2b097c-container {
+    width: 300px;
+  }
+  
+  /* 📌 Tarjeta de Venta */
+  .venta-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #007bff;
+  }
+  
+  /* 📌 Header de la Venta */
+  .venta-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  /* 📌 Botones de Acciones */
+  .venta-botones {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .btn-historial,
+  .btn-agendar,
+  .btn-abrir-venta,
+  .btn-toggle-tabla,
+  .btn-resultado {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  /* 🎨 Colores de botones */
+  .btn-historial {
+    background: #6c757d;
+    color: white;
+  }
+  
+  .btn-agendar {
+    background: #28a745;
+    color: white;
+  }
+  
+  .btn-abrir-venta {
+    background: #007bff;
+    color: white;
+  }
+  
+  .btn-toggle-tabla {
+    background: #17a2b8;
+    color: white;
+  }
+  
+  .btn-resultado {
+    background: #ede0bb;
+    color: black;
+  }
+  
+  /* 🚀 Hover */
+  .btn-historial:hover {
+    background: #5a6268;
+  }
+  
+  .btn-agendar:hover {
+    background: #218838;
+  }
+  
+  .btn-abrir-venta:hover {
+    background: #0056b3;
+  }
+  
+  .btn-toggle-tabla:hover {
+    background: #138496;
+  }
+  
+  .btn-resultado:hover {
+    background: #e0a800;
+  }
+  
+  /* 📌 Tabla de Seguimientos */
+  .seguimientos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 16px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .seguimientos-table th,
+  .seguimientos-table td {
+    border: 1px solid #ddd;
+  padding: 6px 8px; /* más chiquito que antes */
+    text-align: left;
+  }
+  
+  .seguimientos-table th {
+    background: #343a40;
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  .seguimientos-table tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+  
+  /* 📌 Mensajes de error */
+  .error {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .btn-mini {
+    background: #e0e0e0;
+    border: none;
+    padding: 4px 8px;
+    margin-left: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+  
+  .btn-mini:hover {
+    background: #ccc;
+  }
+  
+  .btn-mini.red {
+    background: #f44336;
+    color: white;
+  }
+  .btn-mini.red:hover {
+    background: #d32f2f;
+  }
+
+
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+  
+  .modal-content h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .modal-content textarea,
+  .modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: none;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .modal-buttons button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    background: #007bff;
+    color: white;
+    transition: background 0.3s;
+  }
+  
+  .modal-buttons button:hover {
+    background: #0056b3;
+  }
+  
+  .modal-buttons .btn-mini.red {
+    background: #dc3545;
+  }
+  
+  .modal-buttons .btn-mini.red:hover {
+    background: #b02a37;
+  }
+
+  .fila-info-extra {
+    background-color: #f8f8f8;
+    font-style: italic;
+    color: #555;
+    border-top: 1px solid #ddd;
+    padding: 8px 16px;
+  }
+  
+  .fila-info-extra td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  
+  /* Oculta tarjetas en escritorio */
+.seguimientos-cards {
+  display: none;
+}
+  
+.btn-limpiar-filtros {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.btn-limpiar-filtros:hover {
+  background-color: #d32f2f;
+}
+
+
+/* 🔄 Scroll horizontal solo para la tabla */
+.tabla-scroll-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Opcional: que no se desborde feo */
+.seguimientos-table {
+  min-width: 1000px; /* Ajusta si necesitas más ancho */
+  table-layout: auto;
+}
+
+  /* 📱 Responsive */
+/* Oculta tabla en móviles */
+@media (max-width: 768px) {
+  .seguimientos-table {
+    display: none;
+  }
+
+  .seguimientos-cards {
+    display: block;
+    margin-top: 20px;
+  }
+
+  .seguimiento-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .seguimiento-card h3 {
+    margin: 0 0 10px;
+    color: #0d2a49;
+    font-size: 18px;
+  }
+
+  .seguimiento-card p {
+    margin: 4px 0;
+    font-size: 14px;
+  }
+
+  .seguimiento-card .acciones {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .seguimiento-card .acciones button {
+    flex: 1;
+    padding: 8px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,71 @@
+.resultado-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .seguimiento-info {
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    resize: vertical;
+  }
+  
+  button {
+    padding: 12px 20px;
+    background: #007bff;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #0056b3;
+  }
+  .btn-cancelar {
+    margin-top: 10px;
+    padding: 12px 20px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .btn-cancelar:hover {
+    background: #c82333;
+  }
+  
+  .error {
+    color: red;
+    font-size: 16px;
+  }
+  
+  .error-modal {
+    background-color: #ffe6e6;
+    color: #b00020;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+  }
+  

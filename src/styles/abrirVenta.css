@@ -1,0 +1,87 @@
+/* 📌 Contenedor Principal */
+.abrir-venta-container {
+  width: 100%;
+  max-width: 600px; /* 🔥 Ajuste del ancho máximo */
+  min-width: 50vw;  /* 🔥 Se adapta en pantallas grandes */
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* 📌 Título */
+h1 {
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* 📌 Información del Prospecto */
+p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* 📌 Textarea para Objetivo */
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  resize: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* 📌 Botón de Crear Venta */
+button {
+  padding: 12px;
+  width: 100%;
+  background: #007bffbb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 15px;
+}
+
+button:hover {
+  background: #218838;
+}
+
+/* 📌 Mensajes de error */
+.error {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .abrir-venta-container {
+    min-width: 30vw; /* 🔥 Se adapta en móviles */
+    padding: 27px;
+  }
+
+  textarea {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,156 @@
+/********* 📌 CONTENEDOR PRINCIPAL *********/
+.editar-prospecto-container {
+  width: 100%;
+  max-width: 700px; 
+  margin: 0 auto; /* Centrado */
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/********* 📌 TÍTULO *********/
+.editar-prospecto-container h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/********* 📌 MENSAJES *********/
+.success {
+  color: #28a745;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/********* 📌 FORMULARIO *********/
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/********* 📌 LABELS *********/
+label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 15px;
+  color: #444;
+}
+
+/********* 📌 INPUTS, TEXTAREAS Y SELECTS *********/
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #007bff;
+}
+
+/* 🔹 Textarea más alto */
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* 🔹 Inputs deshabilitados */
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background: #f0f0f0;
+  cursor: not-allowed;
+}
+
+/********* 📌 BOTONES *********/
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-editar {
+  background: #ffc107;
+  color: black;
+}
+
+.btn-editar:hover {
+  background: #e0a800;
+}
+
+.btn-guardar {
+  background: #007bffbb;
+  color: white;
+}
+
+.btn-guardar:hover {
+  background: #1e3f63bb;
+}
+
+.btn-cerrar {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-cerrar:hover {
+  background: #c82333;
+}
+
+/********* 📱 RESPONSIVE PARA MÓVILES *********/
+@media (max-width: 768px) {
+  .editar-prospecto-container {
+    width: 90%; /* 🔹 Más compacto */
+    padding: 10%;
+  }
+
+  .editar-prospecto-container h1 {
+    font-size: 20px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,54 @@
+/* Contenedor principal - ocupa toda la pantalla y centra el contenido */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #6085ff, #f9f4ff);
+}
+
+/* Caja del login */
+.login-box {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 350px;
+}
+
+/* Título */
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Botón */
+.login-button {
+  background: #152142 !important; 
+}
+
+.login-button:hover {
+  background: #14183f !important; 
+}
+
+
+/* Mensaje de error */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}

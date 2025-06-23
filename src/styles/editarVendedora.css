@@ -1,0 +1,113 @@
+/* 📌 Contenedor principal */
+.editar-vendedora-container {
+  
+  width: 100%; /* ✅ Ocupa toda la pantalla */
+  height: calc(90vh - 60px); /* Ocupa toda la altura menos el navbar */
+  padding: 30px;
+  overflow-y: auto; /* ✅ Permite hacer scroll si hay muchas vendedoras */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+}
+
+/* 📌 Título */
+.editar-vendedora-container h1 {
+  font-size: 26px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* 📌 Formulario */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+}
+
+/* 📌 Botón Guardar */
+.btn-guardar {
+  width: 100%;
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-guardar:hover {
+  background: #218838;
+}
+
+/* 📌 Botón Estado (Inactivar/Activar) */
+.btn-estado {
+  width: 100%;
+  padding: 12px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.btn-estado.inactiva {
+  background: #dc3545; /* Rojo para inactivar */
+}
+
+.btn-estado.inactiva:hover {
+  background: #c82333;
+}
+
+.btn-estado.activa {
+  background: #007bff; /* Azul para activar */
+}
+
+.btn-estado.activa:hover {
+  background: #0056b3;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .editar-vendedora-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .form-group input {
+    font-size: 14px;
+  }
+
+  .btn-guardar,
+  .btn-estado {
+    font-size: 16px;
+    padding: 10px;
+  }
+}

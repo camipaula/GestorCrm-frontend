@@ -1,0 +1,155 @@
+/* 📌 Contenedor Principal */
+.crear-prospecto-container {
+  width: 100% !important;
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  padding: 24px !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05) !important;
+  animation: fadeIn 0.5s ease-in-out !important;
+  overflow-y: auto !important;
+}
+
+/* 📌 Título */
+h1 {
+  font-size: 24px !important;
+  color: #1f3b5c !important;
+  text-align: center !important;
+  font-weight: 700 !important;
+  margin-bottom: 24px !important;
+}
+
+/* 📌 Formularios */
+form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+}
+
+/* 📌 Etiquetas */
+label {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 4px !important;
+}
+
+/* 📌 Inputs / Selects / Textareas */
+input,
+select,
+textarea {
+  padding: 10px 12px !important;
+  border: 1px solid #d0d0d0 !important;
+  border-radius: 8px !important;
+  font-size: 15px !important;
+  background: #fdfdfd !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #007bff !important;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15) !important;
+}
+
+textarea {
+  resize: vertical !important;
+  min-height: 100px !important;
+}
+
+/* 📌 Estado visual */
+.estado-label {
+  font-weight: bold !important;
+  color: #007bff !important;
+  background: #f1f8ff !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  border: 1px solid #cce5ff !important;
+}
+
+/* 📌 Botones */
+button[type="submit"],
+.btn-cerrar {
+  padding: 12px !important;
+  font-size: 15px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background 0.3s ease !important;
+}
+
+button[type="submit"] {
+  background: #007bff !important;
+  color: white !important;
+}
+
+button[type="submit"]:hover {
+  background: #0056b3 !important;
+}
+
+.btn-cerrar {
+  background: #dc3545 !important;
+  color: white !important;
+  margin-top: 10px !important;
+}
+
+.btn-cerrar:hover {
+  background: #c82333 !important;
+}
+
+/* 📌 Mensajes */
+.success {
+  color: #28a745 !important;
+  text-align: center !important;
+  font-weight: bold !important;
+}
+
+.error {
+  color: #dc3545 !important;
+  text-align: center !important;
+  font-weight: bold !important;
+}
+
+
+/* 📌 Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .crear-prospecto-container {
+    padding: 18px !important;
+    width: 95% !important;
+  }
+
+  form {
+    gap: 16px !important;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+
+  button[type="submit"],
+  .btn-cerrar {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+}

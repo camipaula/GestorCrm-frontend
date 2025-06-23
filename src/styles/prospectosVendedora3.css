@@ -1,0 +1,281 @@
+/* 📌 Contenedor principal */
+.vendedora-prospectos-page {
+  width: 100% !important;
+  padding: 20px !important;
+  overflow-y: auto !important;
+  background: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 📌 Título */
+.vendedora-prospectos-title {
+  font-size: 26px !important;
+  font-weight: bold !important;
+  color: #333 !important;
+  margin-bottom: 20px !important;
+}
+
+
+
+/* 📌 Botón nuevo prospecto */
+.vendedora-btn-nuevo-prospecto {
+  width: 100% !important;
+  margin-bottom: 20px !important;
+  padding: 12px !important;
+  font-size: 18px !important;
+  background: #2dab21db !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+}
+
+.filtro-grupo-nombre{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  padding: 20px !important;
+  background: #f5f5f5 !important;
+  margin-bottom: 20px !important;
+  margin-top: 20px !important;
+
+}
+/* 📌 Filtros */
+.vendedora-filtros {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 15px !important;
+  margin-bottom: 20px !important;
+  padding: 20px !important;
+  background: #f5f5f5 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+.vendedora-filtros select,
+.vendedora-filtros input {
+  padding: 10px !important;
+  font-size: 15px !important;
+  border: 1px solid #ddd !important;
+  border-radius: 6px !important;
+  outline: none !important;
+}
+
+.vendedora-filtros button {
+  padding: 10px 20px !important;
+  background: #0d2a49 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+}
+.vendedora-filtros button:hover {
+  background: #1a3966 !important;
+}
+
+/* 📌 Tabla */
+.vendedora-prospectos-table {
+  all: unset; /* 🧼 Limpia cualquier estilo heredado */
+  display: table !important;
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin-top: 20px !important;
+  font-size: 16px !important;
+  background: white !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+.vendedora-prospectos-table th,
+.vendedora-prospectos-table td {
+  border: 1px solid #ddd !important;
+  padding: 15px !important;
+  text-align: left !important;
+}
+
+.vendedora-prospectos-table th {
+  background: #0d2a49 !important;
+  color: white !important;
+  text-transform: uppercase !important;
+}
+
+.vendedora-prospectos-table tr:nth-child(even) {
+  background: #f9f9f9 !important;
+}
+
+.botones-acciones button {
+  min-width: 180px; /* 🟩 Opcional para simetría */
+  text-align: center;
+}
+
+
+/* 📌 Botones */
+.vendedora-btn-editar,
+.vendedora-btn-eliminar,
+.vendedora-btn-seguimientos,
+.vendedora-btn-abrir-prospeccion {
+  padding: 8px 12px !important;
+  border: none !important;
+  border-radius: 6px !important;
+  margin: 4px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  transition: background 0.3s !important;
+}
+
+.vendedora-btn-editar {
+  background: #0793ff7a !important;
+  color: black !important;
+}
+
+.vendedora-btn-eliminar {
+  background: #dc3545 !important;
+  color: white !important;
+}
+
+.vendedora-btn-seguimientos {
+  background: #1f3b5c !important;
+  color: white !important;
+}
+
+.vendedora-btn-abrir-prospeccion {
+  background: #1f3b5c !important;
+  color: white !important;
+}
+
+/* 📌 Error */
+.error {
+  color: red !important;
+  font-size: 14px !important;
+  margin-top: 10px !important;
+}
+
+.input-busqueda-nombre {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 200px;
+  margin: 0 10px;
+}
+ 
+/* ❌ Ocultar tarjetas en escritorio */
+.vendedora-cards-mobile {
+  display: none !important;
+}
+
+.btn-toggle-filtros {
+  background-color: #a09bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.paginador-lindo {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.paginador-contenido {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.btn-paginador {
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-paginador:hover {
+  background-color: #5148d6;
+}
+
+.paginador-info {
+  font-weight: normal;
+}
+
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .vendedora-prospectos-page {
+    padding: 15px !important;
+  }
+
+  .vendedora-filtros {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 15px !important;
+  }
+
+  .vendedora-filtros select,
+  .vendedora-filtros input {
+    font-size: 13px !important;
+    padding: 8px !important;
+  }
+
+  .vendedora-filtros button {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+  }
+
+  .vendedora-btn-nuevo-prospecto {
+    font-size: 16px !important;
+    padding: 10px !important;
+  }
+
+  .vendedora-prospectos-table {
+    display: none !important;
+  }
+
+  .vendedora-cards-mobile {
+    display: block !important;
+    margin-top: 20px !important;
+  }
+
+  .vendedora-prospecto-card {
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    margin-bottom: 15px !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .vendedora-prospecto-card h3 {
+    margin: 0 0 8px 0 !important;
+    font-size: 18px !important;
+    color: #0d2a49 !important;
+  }
+
+  .vendedora-prospecto-card p {
+    margin: 4px 0 !important;
+    font-size: 14px !important;
+  }
+
+  .vendedora-prospecto-card .acciones {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+  }
+
+  .vendedora-prospecto-card .acciones button {
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+  }
+}

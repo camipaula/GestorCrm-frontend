@@ -1,0 +1,88 @@
+/* 📌 Contenedor Principal */
+.agendar-container {
+  width: 100%;
+  max-width: 600px; /* 🔥 Ajusta el ancho máximo */
+  min-width: 50vw;  /* 🔥 Se adapta en pantallas grandes */
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* 📌 Título */
+h1 {
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* 📌 Estilos del Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 📌 Campos de entrada */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus, textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* 📌 Selector de Seguimiento */
+.custom-select .css-2b097c-container {
+  width: 100%;
+}
+
+/* 📌 Botón */
+button {
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #218838;
+}
+
+/* 📌 Mensajes de error */
+.error {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .agendar-container {
+    min-width: 71vw; /* 🔥 Se expande en móviles */
+    padding: 10%;
+  }
+
+  input, textarea {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}

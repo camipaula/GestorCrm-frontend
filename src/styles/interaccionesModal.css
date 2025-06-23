@@ -1,0 +1,121 @@
+/* Estilos generales del modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  /* Botón de cerrar */
+  .btn-cerrar {
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .btn-cerrar:hover {
+    background: #c9302c;
+  }
+  
+  /* ✅ Estilo para las interacciones pendientes */
+  .interacciones-container {
+    text-align: left;
+    margin-top: 15px;
+  }
+  
+  .interaccion-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    transition: background 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .interaccion-item:hover {
+    background: #f5f5f5;
+  }
+  
+  .interaccion-detalle {
+    font-size: 0.95rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  /* Iconos dentro del detalle de interacción */
+  .interaccion-detalle strong {
+    color: #007bff;
+  }
+  
+  /* ✅ Estilos para el select y textarea */
+  select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* ✅ Botones */
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  button:first-of-type {
+    background: #28a745;
+    color: white;
+  }
+  
+  button:first-of-type:hover {
+    background: #218838;
+  }
+  
+  /* Mensajes de error y éxito */
+  .mensaje {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  

@@ -1,0 +1,208 @@
+
+
+
+/* 🎯 Contenedor principal del dashboard */
+.home-container {
+  width: 1240px;
+  max-width: 100%;  
+  min-height: calc(100vh - 60px);
+  padding: 30px;
+  background: #f0f4ff;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: -20px !important;
+  margin-top: -22px !important;
+  
+}
+
+
+
+/* 🧪 Título */
+.home-container h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #0d2a49;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* 🔍 Filtros */
+.filtros-dashboard {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: center;
+}
+
+.filtros-dashboard input,
+.filtros-dashboard select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.filtros-dashboard button {
+  padding: 10px;
+  background: #0d2a49;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.filtros-dashboard button:hover {
+  background: #0b1f35;
+}
+
+/* 📊 Tarjetas del dashboard */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-card-c{
+  background: white;
+   padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dashboard-card1{
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #0d2a49;
+}
+
+.dashboard-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+/* 📈 Gráficos */
+.dashboard-card .recharts-wrapper {
+  margin-top: 10px;
+}
+
+/* 🧾 Tabla de cierres */
+.dashboard-card table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.dashboard-card table th,
+.dashboard-card table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.dashboard-card table th {
+  background: #0d2a49;
+  color: white;
+  text-transform: uppercase;
+}
+
+.dashboard-card table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.dashboard-card.resumen,
+.dashboard-card.resumen-secundario {
+  flex: 1;
+  min-width: 260px;
+  max-width: 320px;
+  padding: 10px 15px;
+  font-size: 14px;
+}
+
+.dashboard-resumen-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* 🧾 Tabla de cierres con ancho flexible */
+.tabla-detalle-cierres {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.tabla-detalle-cierres table {
+  min-width: 600px; /* o 700px si quieres que se vea más suelta */
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Puedes ajustar también paddings o font-size si deseas que sea más angosta */
+.tabla-detalle-cierres th,
+.tabla-detalle-cierres td {
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.dashboard-card.tabla-cierres {
+  grid-column: 1 / -1; /* se extiende por todo el ancho */
+  width: 78%;
+}
+
+
+.dashboard-card h3 {
+  margin-bottom: 12px;
+}
+
+.dashboard-card .recharts-legend-item {
+  font-size: 14px;
+}
+
+
+
+
+/* ❗ Error */
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .filtros-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card h3 {
+    font-size: 16px;
+  }
+}

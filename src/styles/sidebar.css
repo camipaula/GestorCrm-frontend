@@ -1,0 +1,126 @@
+/* 📌 Sidebar Principal */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #111827;
+  color: white;
+  position: fixed;
+  top: 60px;
+  left: -250px;
+  transition: left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+/* ☰ Botón de abrir/cerrar Sidebar */
+.toggle-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+/* SOLO mostrar ☰ en escritorio */
+.desktop-only {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* 📂 Menú del Sidebar */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  flex-grow: 1;
+}
+
+/* Enlaces del menú */
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 15px;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  gap: 10px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* 🔚 Botón cerrar sesión */
+.logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: auto;
+}
+
+/* 📱 Móvil */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 50%;
+    left: -40%;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .main-container {
+    margin-left: 0;
+  }
+
+  .sidebar-menu {
+    margin-top: 30%;
+  }
+}
+
+/* 📺 Escritorio cerrado */
+@media (min-width: 769px) {
+  .sidebar.closed {
+    width: 60px;
+    left: 0;
+  }
+
+  .sidebar.closed .nav-link span {
+    display: none;
+  }
+
+  .sidebar.closed .logout-btn span {
+    display: none;
+  }
+}

@@ -1,0 +1,210 @@
+/* 📌 Contenedor principal */
+.vendedoras-container {
+  width: 100%;
+  height: calc(90vh - 60px);
+  padding: 24px;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 🏷️ Título */
+.title {
+  font-size: 28px;
+  color: #1f3b5c;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* 🔍 Filtros */
+.filtros {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.filtros label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f3b5c;
+}
+
+.filtros select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+/* 🔘 Botón crear */
+.btn-crear {
+  width: 100%;
+  padding: 14px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.btn-crear:hover {
+  background-color: #0056b3;
+}
+
+/* 📋 Tabla */
+.vendedoras-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+}
+
+.vendedoras-table th {
+  background-color: #1f3b5c;
+  color: white;
+  padding: 16px;
+  text-transform: uppercase;
+}
+
+.vendedoras-table td {
+  border: 1px solid #e0e0e0;
+  padding: 14px;
+  text-align: center;
+  color: #333;
+}
+
+.vendedoras-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.vendedoras-table tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* ✏️ Botones de acción */
+.btn-editar {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 14px;
+}
+
+.btn-editar:hover {
+  background-color: #0056b3;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 14px;
+}
+
+.btn-eliminar:hover {
+  background-color: #c82333;
+}
+
+/* 🟦 Tarjetas para móviles */
+.cards-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .vendedoras-table {
+    display: none;
+  }
+
+  .cards-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .vendedora-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .vendedora-card .info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .vendedora-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f3b5c;
+    margin: 0;
+  }
+
+  .vendedora-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+  }
+
+  .vendedora-card .acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .vendedora-card .acciones button {
+    font-size: 13px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .vendedora-card .btn-editar {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .vendedora-card .btn-editar:hover {
+    background-color: #0056b3;
+  }
+
+  .vendedora-card .btn-eliminar {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .vendedora-card .btn-eliminar:hover {
+    background-color: #c82333;
+  }
+}

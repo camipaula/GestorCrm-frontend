@@ -1,0 +1,152 @@
+/* 📌 Contenedor principal */
+.ver-seguimientos-container {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+/* 📌 Título */
+.title {
+  font-size: 26px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 📌 Info de la venta */
+.info-venta {
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.info-venta h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.info-venta p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* 📌 Tabla */
+.ver-seguimientos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ver-seguimientos-table th,
+.ver-seguimientos-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.ver-seguimientos-table th {
+  background: #0d2a49;
+  color: white;
+  text-transform: uppercase;
+}
+
+.ver-seguimientos-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* 📌 Botones */
+.btn-resultado,
+.btn-agendar {
+  padding: 8px 12px;
+  margin: 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.btn-resultado {
+  background: #ffc107;
+  color: black;
+}
+
+.btn-resultado:hover {
+  background: #e0a800;
+}
+
+.btn-agendar {
+  background: #28a745;
+  color: white;
+}
+
+.btn-agendar:hover {
+  background: #218838;
+}
+
+
+
+/* 📌 Sin seguimientos */
+.sin-seguimientos {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.sin-seguimientos p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.btn-agendar {
+  margin-bottom: 20px;
+}
+
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .ver-seguimientos-container {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .info-venta h2 {
+    font-size: 18px;
+  }
+
+  .info-venta p {
+    font-size: 14px;
+  }
+
+  .ver-seguimientos-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .ver-seguimientos-table th,
+  .ver-seguimientos-table td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .btn-resultado,
+  .btn-agendar {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  
+}
