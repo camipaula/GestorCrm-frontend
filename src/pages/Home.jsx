@@ -28,13 +28,13 @@ const Home = () => {
   const [fechaFinDefecto, setFechaFinDefecto] = useState("");
 
   const [cedulaVendedora, setCedulaVendedora] = useState("");
-  const [sector, setSector] = useState("");
+  //const [sector, setSector] = useState("");
   const [ciudad, setCiudad] = useState("");
   const [idCategoria, setIdCategoria] = useState("");
 
   const [idOrigen, setIdOrigen] = useState("");
   const [vendedoras, setVendedoras] = useState([]);
-  const [sectores, setSectores] = useState([]);
+  //const [sectores, setSectores] = useState([]);
   const [ciudades, setCiudades] = useState([]);
   const [origenes, setOrigenes] = useState([]);
   const [categorias, setCategorias] = useState([]);
@@ -83,7 +83,7 @@ const Home = () => {
     return (
       (rol === "admin" && cedulaVendedora) ||
       ciudad ||
-      sector ||
+      //sector ||
       idCategoria ||
       idOrigen ||
       fechaInicio !== fechaInicioDefecto ||
@@ -108,7 +108,7 @@ const Home = () => {
     setFechaInicioDefecto(inicio);
     setFechaFinDefecto(fin);
     setCedulaVendedora("");
-    setSector("");
+    //setSector("");
     setCiudad("");
     setIdCategoria("");
     setIdOrigen("");
@@ -151,10 +151,10 @@ const Home = () => {
 
     const fetchData = async () => {
       try {
-        const [sectoresRes, ciudadesRes, origenesRes] = await Promise.all([
-          fetch(`${import.meta.env.VITE_API_URL}/api/prospectos/sectores`, {
+       const [/*sectoresRes,*/ ciudadesRes, origenesRes] = await Promise.all([
+           /*fetch(`${import.meta.env.VITE_API_URL}/api/prospectos/sectores`, {
             headers: { Authorization: `Bearer ${token}` },
-          }),
+          }),*/
           fetch(`${import.meta.env.VITE_API_URL}/api/prospectos/ciudades`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
@@ -163,11 +163,11 @@ const Home = () => {
           }),
         ]);
 
-        const sectores = await sectoresRes.json();
+      //  const sectores = await sectoresRes.json();
         const ciudades = await ciudadesRes.json();
         const origenes = await origenesRes.json();
 
-        setSectores(Array.isArray(sectores) ? sectores : []);
+       // setSectores(Array.isArray(sectores) ? sectores : []);
         setCiudades(Array.isArray(ciudades) ? ciudades : []);
         setOrigenes(Array.isArray(origenes) ? origenes : []);
       } catch (error) {
@@ -220,7 +220,7 @@ const Home = () => {
         params.cedula_vendedora = cedulaVendedora;
       }
 
-      if (sector) params.sector = sector;
+     // if (sector) params.sector = sector;
       if (ciudad) params.ciudad = ciudad;
       if (idCategoria) params.id_categoria = idCategoria;
       if (idOrigen) params.id_origen = idOrigen;
@@ -343,12 +343,12 @@ const Home = () => {
             </select>
 
 
-            <select value={sector} onChange={(e) => setSector(e.target.value)}>
+            {/*<select value={sector} onChange={(e) => setSector(e.target.value)}>
               <option value="">Todos los sectores</option>
               {sectores.map((s, i) => (
                 <option key={i} value={s}>{s}</option>
               ))}
-            </select>
+            </select>*/}
 
 
             <select value={idOrigen} onChange={(e) => setIdOrigen(e.target.value)}>

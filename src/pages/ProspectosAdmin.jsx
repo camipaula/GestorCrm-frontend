@@ -14,7 +14,7 @@ const ProspectosAdmin = () => {
 
   const [prospectos, setProspectos] = useState([]);
   const [vendedoras, setVendedoras] = useState([]);
-  const [sectores, setSectores] = useState([]);
+ // const [sectores, setSectores] = useState([]);
   const [categorias, setCategorias] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ const ProspectosAdmin = () => {
   const [fechaFinDefecto, setFechaFinDefecto] = useState("");
 
 
-  const [sectorFiltro, setSectorFiltro] = useState(null);
+  //const [sectorFiltro, setSectorFiltro] = useState(null);
   const [categoriaFiltro, setCategoriaFiltro] = useState(null);
   const [estados, setEstados] = useState([]);
   const [busquedaNombre, setBusquedaNombre] = useState("");
@@ -69,7 +69,7 @@ const ProspectosAdmin = () => {
     return (
       cedulaVendedora ||
       estadoFiltro.length > 0 ||
-      sectorFiltro ||
+     // sectorFiltro ||
       categoriaFiltro ||
       ciudadFiltro ||
       provinciaFiltro ||
@@ -83,7 +83,7 @@ const ProspectosAdmin = () => {
 
   useEffect(() => {
     obtenerVendedoras();
-    obtenerSectores();
+    //obtenerSectores();
     obtenerCategorias();
     obtenerEstados();
     obtenerCiudades();
@@ -129,7 +129,7 @@ const ProspectosAdmin = () => {
 
         setEstadoFiltro(filtros.estadoFiltro || []);
         setCategoriaFiltro(filtros.categoriaFiltro || null);
-        setSectorFiltro(filtros.sectorFiltro || null);
+        //setSectorFiltro(filtros.sectorFiltro || null);
       } catch (e) {
         console.error("Error al parsear filtros guardados:", e);
       }
@@ -216,7 +216,7 @@ const ProspectosAdmin = () => {
     estadoFiltro,
     fechaInicio,
     fechaFin,
-    sectorFiltro,
+    //sectorFiltro,
     categoriaFiltro,
     ciudadFiltro,
     provinciaFiltro,
@@ -238,7 +238,7 @@ const ProspectosAdmin = () => {
     }
   };
 
-  const obtenerSectores = async () => {
+  /*const obtenerSectores = async () => {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/prospectos/sectores`, {
@@ -252,7 +252,7 @@ const ProspectosAdmin = () => {
       //console.error(":", error);
       setError(error.message);
     }
-  };
+  };*/
 
   const obtenerCategorias = async () => {
     try {
@@ -279,7 +279,7 @@ const ProspectosAdmin = () => {
       }
       if (fechaInicio) params.append("fechaInicio", fechaInicio);
       if (fechaFin) params.append("fechaFin", fechaFin);
-      if (sectorFiltro) params.append("sector", sectorFiltro.value);
+      //if (sectorFiltro) params.append("sector", sectorFiltro.value);
       if (categoriaFiltro) params.append("id_categoria", categoriaFiltro.value);
       if (ciudadFiltro) params.append("ciudad", ciudadFiltro);
       if (provinciaFiltro) params.append("provincia", provinciaFiltro);
@@ -353,7 +353,7 @@ const ProspectosAdmin = () => {
       if (categoriaFiltro) url += `id_categoria=${categoriaFiltro.value}&`;
       if (fechaInicio) url += `fechaInicio=${fechaInicio}&`;
       if (fechaFin) url += `fechaFin=${fechaFin}&`;
-      if (sectorFiltro) url += `sector=${sectorFiltro.value}&`;
+      //if (sectorFiltro) url += `sector=${sectorFiltro.value}&`;
       if (ciudadFiltro) url += `ciudad=${encodeURIComponent(ciudadFiltro)}&`;
       if (provinciaFiltro) url += `provincia=${encodeURIComponent(provinciaFiltro)}&`;
 
@@ -434,7 +434,7 @@ const ProspectosAdmin = () => {
       estadoFiltro,
       fechaInicio,
       fechaFin,
-      sectorFiltro,
+     // sectorFiltro,
       categoriaFiltro,
       ciudadFiltro,
       provinciaFiltro,
@@ -447,7 +447,7 @@ const ProspectosAdmin = () => {
     estadoFiltro,
     fechaInicio,
     fechaFin,
-    sectorFiltro,
+   // sectorFiltro,
     categoriaFiltro,
     ciudadFiltro,
     provinciaFiltro,
@@ -464,7 +464,7 @@ const ProspectosAdmin = () => {
   const limpiarFiltros = () => {
     setCedulaVendedora("");
     setEstadoFiltro([]);
-    setSectorFiltro(null);
+   // setSectorFiltro(null);
     setCategoriaFiltro(null);
     setCiudadFiltro("");
     setProvinciaFiltro("");
@@ -531,7 +531,7 @@ const ProspectosAdmin = () => {
             />
           </div>
 
-          <div className="filtro-grupo">
+       { /*  <div className="filtro-grupo">
             <label>Sector</label>
             <Select
               options={sectores}
@@ -542,7 +542,7 @@ const ProspectosAdmin = () => {
               onChange={setSectorFiltro}
               isClearable
             />
-          </div>
+          </div>*/}
           <div className="filtro-grupo">
             <label>Ciudad</label>
             <Select

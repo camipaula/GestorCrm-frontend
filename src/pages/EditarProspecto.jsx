@@ -165,8 +165,8 @@ const EditarProspecto = () => {
         <label>Ciudad:</label>
         <input type="text" name="ciudad" value={prospecto?.ciudad || ""} onChange={handleChange} disabled={!modoEdicion} />
 
-        <label>Sector:</label>
-        <input type="text" name="sector" value={prospecto?.sector || ""} onChange={handleChange} disabled={!modoEdicion} />
+       {/* <label>Sector:</label>
+        <input type="text" name="sector" value={prospecto?.sector || ""} onChange={handleChange} disabled={!modoEdicion} />*/}
         <label># Empleados:</label>
         <input
           type="number"
