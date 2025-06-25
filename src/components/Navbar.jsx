@@ -29,7 +29,7 @@ const Navbar = ({ toggleSidebar }) => {
       <h2 className="navbar-title">GESTOR TAX</h2>
 
       <div className="navbar-right">
-      <span className="nombre-usuario">👤Bienvenida, {nombreUsuario}</span>
+      <span className="nombre-usuario">Bienvenida, {nombreUsuario}</span>
         <button className="logout-btn" onClick={logout}>
           Cerrar Sesión
         </button>
