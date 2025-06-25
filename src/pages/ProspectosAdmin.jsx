@@ -464,16 +464,14 @@ const ProspectosAdmin = () => {
   const limpiarFiltros = () => {
     setCedulaVendedora("");
     setEstadoFiltro([]);
-   // setSectorFiltro(null);
     setCategoriaFiltro(null);
     setCiudadFiltro("");
     setProvinciaFiltro("");
     setBusquedaNombre("");
     setBusquedaInput("");
-    establecerFechasUltimos3Meses(); // vuelve a poner las fechas de los últimos 3 meses
+    establecerFechasUltimos3Meses(); 
     setPaginaActual(1);
     localStorage.removeItem("filtros_prospectos_admin");
-    // No llamamos buscarProspectos directamente, el useEffect ya se encarga
   };
 
 
@@ -530,19 +528,6 @@ const ProspectosAdmin = () => {
               isClearable
             />
           </div>
-
-       { /*  <div className="filtro-grupo">
-            <label>Sector</label>
-            <Select
-              options={sectores}
-              placeholder="Seleccionar Sector"
-              className="select-sector"
-              classNamePrefix="select"
-              value={sectorFiltro}
-              onChange={setSectorFiltro}
-              isClearable
-            />
-          </div>*/}
           <div className="filtro-grupo">
             <label>Ciudad</label>
             <Select
