@@ -319,7 +319,7 @@ const SeguimientosVendedora = () => {
         <table className="seguimientos-table">
           <thead>
             <tr>
-              <th>Prospecto</th>
+              <th>Empresa</th>
               <th>Objetivo</th>
               <th>Estado del Prospecto</th>
               <th>Última Fecha</th>

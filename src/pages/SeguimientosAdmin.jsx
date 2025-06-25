@@ -492,11 +492,11 @@ const SeguimientosAdmin = () => {
         <table className="seguimientos-table">
           <thead>
             <tr>
-              <th>Prospecto</th>
+              <th>Empresa</th>
               <th>Vendedora</th>
 
               <th>Objetivo</th>
-              <th>Estado del Prospecto</th>
+              <th>Estado de Prospección</th>
               <th>Última Fecha</th>
               <th>Último Tipo</th>
               <th>Último Resultado</th>
