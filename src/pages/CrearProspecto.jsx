@@ -29,7 +29,6 @@
         //sector: "",
         cedula_ruc: "",
         cedula_vendedora: "",
-        // objetivo: "",
         created_at: new Date().toISOString().split("T")[0],
         empleados: "",
         // monto_proyectado: "",
@@ -115,9 +114,6 @@
           { campo: formData.nombre, mensaje: "El nombre es obligatorio." },
           { campo: formData.id_origen, mensaje: "Debe seleccionar un origen." },
           { campo: formData.id_categoria, mensaje: "Debe seleccionar una categoría." },
-          // { campo: formData.objetivo, mensaje: "Debe ingresar el objetivo de la prospección." },
-          //{ campo: formData.empleados, mensaje: "Debe ingresar el número de empleados." },
-          //{ campo: formData.monto_proyectado, mensaje: "Debe ingresar el monto proyectado de la venta." },
           { campo: formData.cedula_vendedora, mensaje: "Debe asignar una vendedora." }
         ];
 
@@ -127,17 +123,6 @@
             return setError(item.mensaje);
           }
         }
-
-        /*if (isNaN(formData.empleados) || Number(formData.empleados) < 0) {
-          setEnviando(false);
-          return setError("El número de empleados debe ser un número válido y no negativo.");
-        }*/
-
-        /* if (isNaN(formData.monto_proyectado) || Number(formData.monto_proyectado) < 0) {
-          setEnviando(false);
-          return setError("El monto proyectado debe ser un número válido y no negativo.");
-        }*/
-
         try {
           const token = localStorage.getItem("token");
 
@@ -278,24 +263,6 @@
                 </select>
               </>
             )}
-
-            {/*<label>Objetivo de la Prospección <span className="required">*</span>:</label>
-            <textarea
-              name="objetivo"
-              value={formData.objetivo || ""}
-              onChange={handleChange}
-              required
-            />
-            <label>Monto Proyectado de la Venta <span className="required">*</span>:</label>
-            <input
-              type="number"
-              name="monto_proyectado"
-              value={formData.monto_proyectado}
-              onChange={handleChange}
-              required
-              onWheel={(e) => e.target.blur()}
-
-            /> */}
 
             <button type="submit" disabled={enviando}>
               {enviando ? "Creando..." : "Crear Prospecto"}
