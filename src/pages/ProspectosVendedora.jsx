@@ -10,7 +10,6 @@ const ProspectosVendedora = () => {
   const navigate = useNavigate();
   const [cedulaVendedora, setCedulaVendedora] = useState(null);
   const [prospectos, setProspectos] = useState([]);
-  const [sectores, setSectores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -23,7 +22,6 @@ const ProspectosVendedora = () => {
   const [fechaInicioDefecto, setFechaInicioDefecto] = useState("");
   const [fechaFinDefecto, setFechaFinDefecto] = useState("");
 
-  const [sectorFiltro, setSectorFiltro] = useState(null);
   const [estados, setEstados] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [ciudades, setCiudades] = useState([]);
@@ -39,6 +37,15 @@ const ProspectosVendedora = () => {
   const [totalPaginas, setTotalPaginas] = useState(1);
 
   const [orden, setOrden] = useState("");
+
+  //modal venta
+  const [mostrarModalAbrirVenta, setMostrarModalAbrirVenta] = useState(false);
+  const [prospectoSeleccionado, setProspectoSeleccionado] = useState(null);
+  const [nuevoObjetivo, setNuevoObjetivo] = useState("");
+  const [nuevoMonto, setNuevoMonto] = useState("");
+  const [tiposServicio, setTiposServicio] = useState([]);
+  const [tipoServicioSeleccionado, setTipoServicioSeleccionado] = useState(null);
+  const [errorCrearVenta, setErrorCrearVenta] = useState("");
 
 
 
@@ -63,7 +70,6 @@ const ProspectosVendedora = () => {
     // Cargar opciones (ciudades, provincias, etc.)
     const cargarFiltros = async () => {
       await Promise.all([
-        obtenerSectores(),
         obtenerEstados(),
         obtenerCategorias(),
         obtenerCiudades(),
@@ -75,7 +81,6 @@ const ProspectosVendedora = () => {
         if (filtrosParsed.estadoFiltro) setEstadoFiltro(filtrosParsed.estadoFiltro);
         if (filtrosParsed.fechaInicio) setFechaInicio(filtrosParsed.fechaInicio);
         if (filtrosParsed.fechaFin) setFechaFin(filtrosParsed.fechaFin);
-        if (filtrosParsed.sectorFiltro) setSectorFiltro(filtrosParsed.sectorFiltro);
         if (filtrosParsed.busquedaNombre) setBusquedaNombre(filtrosParsed.busquedaNombre);
         if (filtrosParsed.ciudadFiltro) setCiudadFiltro(filtrosParsed.ciudadFiltro);
         if (filtrosParsed.provinciaFiltro) setProvinciaFiltro(filtrosParsed.provinciaFiltro);
@@ -98,7 +103,6 @@ const ProspectosVendedora = () => {
       estadoFiltro,
       fechaInicio,
       fechaFin,
-      sectorFiltro,
       busquedaNombre,
       ciudadFiltro,
       provinciaFiltro,
@@ -111,7 +115,6 @@ const ProspectosVendedora = () => {
     estadoFiltro,
     fechaInicio,
     fechaFin,
-    sectorFiltro,
     busquedaNombre,
     ciudadFiltro,
     provinciaFiltro,
@@ -119,6 +122,24 @@ const ProspectosVendedora = () => {
     orden,
     filtrosInicializados
   ]);
+
+  useEffect(() => {
+    const obtenerTiposServicio = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tipos-servicio`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+        setTiposServicio(data.map((t) => ({ value: t.id_tipo_servicio, label: t.nombre })));
+      } catch (err) {
+        console.error("Error al cargar tipos de servicio:", err);
+      }
+    };
+
+    obtenerTiposServicio();
+  }, []);
+
 
   const obtenerCategorias = async () => {
     try {
@@ -199,6 +220,43 @@ const ProspectosVendedora = () => {
     setFechaFinDefecto(fin);
   };
 
+  const handleCrearVenta = async () => {
+    if (!nuevoObjetivo.trim() || isNaN(nuevoMonto) || Number(nuevoMonto) <= 0) {
+      setErrorCrearVenta("Completa todos los campos con valores válidos.");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ventas`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          id_prospecto: prospectoSeleccionado.id_prospecto,
+          objetivo: nuevoObjetivo,
+          monto_proyectado: nuevoMonto,
+          id_tipo_servicio: tipoServicioSeleccionado?.value || null
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+
+      setMostrarModalAbrirVenta(false);
+      setNuevoObjetivo("");
+      setNuevoMonto("");
+      setTipoServicioSeleccionado(null);
+      buscarProspectos(); // recarga lista
+
+      navigate(`/seguimientos-prospecto/${prospectoSeleccionado.id_prospecto}`);
+    } catch (err) {
+      setErrorCrearVenta(err.message || "Error al crear prospección");
+    }
+  };
 
 
   useEffect(() => {
@@ -216,7 +274,6 @@ const ProspectosVendedora = () => {
     estadoFiltro,
     fechaInicio,
     fechaFin,
-    sectorFiltro,
     categoriaFiltro,
     ciudadFiltro,
     provinciaFiltro,
@@ -225,20 +282,6 @@ const ProspectosVendedora = () => {
     orden
   ]);
 
-
-  const obtenerSectores = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/prospectos/sectores`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error("Error obteniendo sectores");
-      const data = await res.json();
-      setSectores(data.map((s) => ({ value: s, label: s })));
-    } catch (err) {
-      console.error("Error obteniendo sectores:", err);
-    }
-  };
 
 
   const buscarProspectos = async () => {
@@ -257,7 +300,6 @@ const ProspectosVendedora = () => {
       }
       if (fechaInicio) params.append("fechaInicio", fechaInicio);
       if (fechaFin) params.append("fechaFin", fechaFin);
-      if (sectorFiltro) params.append("sector", sectorFiltro.value);
       if (categoriaFiltro) params.append("id_categoria", categoriaFiltro.value);
       if (ciudadFiltro) params.append("ciudad", ciudadFiltro);
       if (provinciaFiltro) params.append("provincia", provinciaFiltro);
@@ -282,7 +324,6 @@ const ProspectosVendedora = () => {
   const hayFiltrosActivos = () => {
     return (
       estadoFiltro.length > 0 ||
-      sectorFiltro ||
       categoriaFiltro ||
       ciudadFiltro ||
       provinciaFiltro ||
@@ -308,7 +349,6 @@ const ProspectosVendedora = () => {
       if (categoriaFiltro) url += `&id_categoria=${categoriaFiltro.value}`;
       if (fechaInicio) url += `&fechaInicio=${fechaInicio}`;
       if (fechaFin) url += `&fechaFin=${fechaFin}`;
-      if (sectorFiltro) url += `&sector=${sectorFiltro.value}`;
       if (ciudadFiltro) url += `&ciudad=${encodeURIComponent(ciudadFiltro)}`;
       if (provinciaFiltro) url += `&provincia=${encodeURIComponent(provinciaFiltro)}`;
       if (orden) url += `&orden=${orden}`;
@@ -345,7 +385,6 @@ const ProspectosVendedora = () => {
 
   const limpiarFiltros = () => {
     setEstadoFiltro([]);
-    setSectorFiltro(null);
     setCategoriaFiltro(null);
     setCiudadFiltro(null);
     setProvinciaFiltro(null);
@@ -428,22 +467,6 @@ const ProspectosVendedora = () => {
 
           </div>
 
-          <div className="filtro-grupo">
-            <label>Sector</label>
-            <Select
-              options={sectores}
-              placeholder="Seleccionar Sector"
-              className="select-sector"
-              value={sectorFiltro}
-              onChange={(op) => {
-                setSectorFiltro(op);
-                setPaginaActual(1);
-                buscarProspectos();
-              }}
-              isClearable
-            />
-
-          </div>
 
           <div className="filtro-grupo">
             <label>Ciudad</label>
@@ -652,14 +675,22 @@ const ProspectosVendedora = () => {
                       <td>Sin programación</td>
                       <td>Sin nota</td>
                       <td>
-                        <button className="vendedora-btn-abrir-prospeccion" onClick={() => navigate(`/abrir-venta/${p.id_prospecto}`)}>
+                        <button
+                          className="vendedora-btn-abrir-prospeccion"
+                          onClick={() => {
+                            setProspectoSeleccionado(p);
+                            setMostrarModalAbrirVenta(true);
+                          }}
+                        >
                           ➕ Abrir Prospección
                         </button>
                         <button className="vendedora-btn-editar" onClick={() => navigate(`/editar-prospecto/${p.id_prospecto}`)}>
                           Ver Información
                         </button>
+
                       </td>
                     </tr>,
+
                   ]
               )
             ) : (
@@ -719,9 +750,16 @@ const ProspectosVendedora = () => {
                   <p><strong>Próximo Contacto:</strong> Sin programar</p>
                   <p><strong>Última Nota:</strong> Sin nota</p>
                   <div className="acciones">
-                    <button className="vendedora-btn-abrir-prospeccion" onClick={() => navigate(`/abrir-venta/${p.id_prospecto}`)}>
-                      Abrir Prospección
+                    <button
+                      className="vendedora-btn-abrir-prospeccion"
+                      onClick={() => {
+                        setProspectoSeleccionado(p);
+                        setMostrarModalAbrirVenta(true);
+                      }}
+                    >
+                      ➕ Abrir Prospección
                     </button>
+
                     <button className="vendedora-btn-editar" onClick={() => navigate(`/editar-prospecto/${p.id_prospecto}`)}>
                       Ver Información
                     </button>
@@ -733,6 +771,48 @@ const ProspectosVendedora = () => {
           <p style={{ textAlign: "center", fontWeight: "bold" }}>No hay prospectos disponibles</p>
         )}
       </div>
+      {mostrarModalAbrirVenta && (
+        <div className="modal">
+          <div className="modal-contenido">
+            <h3>Crear Prospección para {prospectoSeleccionado?.nombre}</h3>
+
+            <label>Objetivo de la Prospección *</label>
+            <textarea
+              value={nuevoObjetivo}
+              onChange={(e) => setNuevoObjetivo(e.target.value)}
+              placeholder="Describe el objetivo..."
+            />
+
+            <label>Monto Proyectado *</label>
+            <input
+              type="number"
+              value={nuevoMonto}
+              onChange={(e) => setNuevoMonto(e.target.value)}
+              placeholder="Ej: 5000"
+            />
+
+            <label>Tipo de Servicio</label>
+            <Select
+              options={tiposServicio}
+              placeholder="Selecciona el tipo de servicio"
+              value={tipoServicioSeleccionado}
+              onChange={setTipoServicioSeleccionado}
+              isClearable
+            />
+
+            {errorCrearVenta && <p className="error">{errorCrearVenta}</p>}
+
+            <div className="modal-acciones">
+              <button className="btn-confirmar" onClick={handleCrearVenta}>
+                Crear
+              </button>
+              <button className="btn-cancelar" onClick={() => setMostrarModalAbrirVenta(false)}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
