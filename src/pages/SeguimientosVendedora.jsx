@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { obtenerCedulaDesdeToken } from "../utils/auth";
 import "../styles/seguimientosProspecto.css";
 import React from "react";
+import Select from "react-select";
 
 const SeguimientosVendedora = () => {
   const navigate = useNavigate();
@@ -26,6 +27,9 @@ const SeguimientosVendedora = () => {
   const [limitePorPagina] = useState(10);
   const [busquedaInput, setBusquedaInput] = useState("");
 
+  const [nuevoMontoProyectado, setNuevoMontoProyectado] = useState("");
+  const [tiposServicio, setTiposServicio] = useState([]);
+  const [tipoServicioSeleccionado, setTipoServicioSeleccionado] = useState(null);
 
   useEffect(() => {
     const filtrosGuardados = localStorage.getItem("filtros_seguimientos_vendedora");
@@ -62,6 +66,23 @@ const SeguimientosVendedora = () => {
 
 
   }, [filtroEstado, busquedaNombre, filtroSeguimiento, filtrosInicializados]);
+
+  useEffect(() => {
+    const obtenerTiposServicio = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tipos-servicio`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+        setTiposServicio(data.map(t => ({ value: t.id_tipo_servicio, label: t.nombre })));
+      } catch (err) {
+        console.error("Error al cargar tipos de servicio:", err);
+      }
+    };
+
+    obtenerTiposServicio();
+  }, []);
 
   const capitalizar = (texto) => {
     if (!texto) return "";
@@ -139,9 +160,15 @@ const SeguimientosVendedora = () => {
     }
   };
 
-  const abrirModalEditar = (id_venta, objetivoActual) => {
+  const abrirModalEditar = (id_venta, objetivoActual, montoProyectadoActual, tipoServicioActual) => {
     setIdVentaSeleccionada(id_venta);
     setNuevoObjetivo(objetivoActual);
+    setNuevoMontoProyectado(montoProyectadoActual ?? "");
+    setTipoServicioSeleccionado(
+      tipoServicioActual
+        ? { value: tipoServicioActual.id_tipo_servicio, label: tipoServicioActual.nombre }
+        : null
+    );
     setModalEditar(true);
   };
 
@@ -154,17 +181,22 @@ const SeguimientosVendedora = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ objetivo: nuevoObjetivo }),
+        body: JSON.stringify({
+          objetivo: nuevoObjetivo,
+          monto_proyectado: nuevoMontoProyectado === "" ? null : parseFloat(nuevoMontoProyectado),
+          id_tipo_servicio: tipoServicioSeleccionado?.value || null,
+        }),
       });
 
-      if (!res.ok) throw new Error("Error actualizando objetivo");
-      alert("Objetivo actualizado correctamente");
+      if (!res.ok) throw new Error("Error actualizando datos");
+      alert("Actualización exitosa");
       setModalEditar(false);
-      buscarSeguimientos(); // Recargar
+      buscarSeguimientos();
     } catch (err) {
       alert("Error: " + err.message);
     }
   };
+
   const clasificarSeguimiento = (venta) => {
     const seguimientos = venta.seguimientos || [];
     if (seguimientos.length === 0) return "sin_seguimiento";
@@ -345,7 +377,7 @@ const SeguimientosVendedora = () => {
 
                   <tr key={p.id_venta}>
                     <td>{p.prospecto?.nombre ? p.prospecto.nombre.toUpperCase() : "SIN PROSPECTO"}</td>
-<td>{p.objetivo ? capitalizar(p.objetivo.toUpperCase()) : "SIN OBJETIVO"}</td>
+                    <td>{p.objetivo ? capitalizar(p.objetivo.toUpperCase()) : "SIN OBJETIVO"}</td>
                     <td>
                       {p.estado_venta?.nombre === "Cierre"
                         ? `Cierre ($${p.monto_cierre?.toFixed(2) || "0.00"})`
@@ -353,13 +385,13 @@ const SeguimientosVendedora = () => {
                     </td>
 
                     <td>{ultimoSeguimiento?.fecha_programada ? new Date(ultimoSeguimiento.fecha_programada).toLocaleDateString() : "No hay"}</td>
-<td>{ultimoSeguimiento?.tipo_seguimiento?.descripcion
-  ? ultimoSeguimiento.tipo_seguimiento.descripcion.toUpperCase()
-  : "NO REGISTRADO"}</td>
+                    <td>{ultimoSeguimiento?.tipo_seguimiento?.descripcion
+                      ? ultimoSeguimiento.tipo_seguimiento.descripcion.toUpperCase()
+                      : "NO REGISTRADO"}</td>
                     <td>{ultimoSeguimiento?.resultado || "PENDIENTE"}</td>
-<td>{ultimoSeguimiento?.nota
-  ? ultimoSeguimiento.nota.toUpperCase()
-  : "SIN NOTA"}</td>                    <td>{etiquetaSeguimiento(p)}</td>
+                    <td>{ultimoSeguimiento?.nota
+                      ? ultimoSeguimiento.nota.toUpperCase()
+                      : "SIN NOTA"}</td>                    <td>{etiquetaSeguimiento(p)}</td>
 
                     <td>
                       {!tieneSeguimientos ? (
@@ -378,7 +410,15 @@ const SeguimientosVendedora = () => {
                         </button>
                       )}
 
-                      <button className="btn-mini" onClick={() => abrirModalEditar(p.id_venta, p.objetivo)}>✏️</button>
+                      <button
+                        className="btn-mini"
+                        onClick={() =>
+                          abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)
+                        }
+                      >
+                        ✏️
+                      </button>
+
 
                     </td>
                   </tr>
@@ -387,18 +427,18 @@ const SeguimientosVendedora = () => {
                   <tr className="fila-info-extra">
                     <td colSpan="7" style={{ fontStyle: "italic", color: "#555", backgroundColor: "#c9edec" }}>
                       <strong>Siguiente fecha programada:</strong>{" "}
-                      {siguienteSeguimiento
-                        ? formatearFechaVisual(siguienteSeguimiento.fecha_programada)
-
-                        : "No se ha agendado un seguimiento."}
-                      {siguienteSeguimiento && (
+                      {siguienteSeguimiento ? (
                         <>
-                          {"  —  "}
+                          {formatearFechaVisual(siguienteSeguimiento.fecha_programada)}
+                          {" — "}
                           <strong>Motivo:</strong> {siguienteSeguimiento.motivo || "Sin motivo"}
                         </>
+                      ) : (
+                        "No se ha agendado un seguimiento."
                       )}
                     </td>
                   </tr>
+
                 </React.Fragment>
 
               );
@@ -436,7 +476,14 @@ const SeguimientosVendedora = () => {
                   <button className="btn-ver-seguimientos" onClick={() => navigate(`/seguimientos-prospeccion/${p.id_venta}`)}>📜 Ver Seguimientos</button>
                 )}
 
-                <button className="btn-mini" onClick={() => abrirModalEditar(p.id_venta, p.objetivo)}>✏️</button>
+                <button
+                  className="btn-mini"
+                  onClick={() =>
+                    abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)
+                  }
+                >
+                  ✏️
+                </button>
                 <p style={{ fontStyle: "italic", marginTop: "10px" }}>
                   <strong>Siguiente fecha programada:</strong>{" "}
                   {siguienteSeguimiento
@@ -459,11 +506,32 @@ const SeguimientosVendedora = () => {
       {modalEditar && (
         <div className="modal-backdrop">
           <div className="modal-content">
-            <h3>Editar Objetivo</h3>
+            <h3>Editar Prospección</h3>
+
+            <label>Objetivo</label>
             <textarea
               value={nuevoObjetivo}
               onChange={(e) => setNuevoObjetivo(e.target.value)}
             />
+
+            <label>Monto Proyectado</label>
+            <input
+              type="number"
+              value={nuevoMontoProyectado}
+              onChange={(e) => setNuevoMontoProyectado(e.target.value)}
+              min="0"
+              step="0.01"
+            />
+
+            <label>Tipo de Servicio</label>
+            <Select
+              options={tiposServicio}
+              value={tipoServicioSeleccionado}
+              onChange={setTipoServicioSeleccionado}
+              isClearable
+              placeholder="Seleccionar tipo"
+            />
+
             <div className="modal-buttons">
               <button onClick={guardarObjetivo}>Guardar</button>
               <button onClick={() => setModalEditar(false)}>Cancelar</button>
@@ -471,6 +539,7 @@ const SeguimientosVendedora = () => {
           </div>
         </div>
       )}
+
 
     </div>
   );

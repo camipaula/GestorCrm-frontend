@@ -31,6 +31,9 @@ const SeguimientosAdmin = () => {
   const [notaReapertura, setNotaReapertura] = useState("");
   const [fechaReapertura, setFechaReapertura] = useState("");
 
+const [nuevoMontoProyectado, setNuevoMontoProyectado] = useState("");
+const [tiposServicio, setTiposServicio] = useState([]);
+const [tipoServicioSeleccionado, setTipoServicioSeleccionado] = useState(null);
 
   const rol = getRol();
   const esSoloLectura = rol === "lectura";
@@ -235,32 +238,44 @@ const SeguimientosAdmin = () => {
     }
   };
 
-  const abrirModalEditar = (id_venta, objetivoActual) => {
-    setIdVentaSeleccionada(id_venta);
-    setNuevoObjetivo(objetivoActual);
-    setModalEditar(true);
-  };
+  const abrirModalEditar = (id_venta, objetivoActual, montoProyectadoActual, tipoServicioActual) => {
+  setIdVentaSeleccionada(id_venta);
+  setNuevoObjetivo(objetivoActual);
+  setNuevoMontoProyectado(montoProyectadoActual ?? "");
+  setTipoServicioSeleccionado(
+    tipoServicioActual
+      ? { value: tipoServicioActual.id_tipo_servicio, label: tipoServicioActual.nombre }
+      : null
+  );
+  setModalEditar(true);
+};
+
 
   const guardarObjetivo = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ventas/${idVentaSeleccionada}/objetivo`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ objetivo: nuevoObjetivo }),
-      });
+  try {
+    const token = localStorage.getItem("token");
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ventas/${idVentaSeleccionada}/objetivo`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        objetivo: nuevoObjetivo,
+        monto_proyectado: nuevoMontoProyectado === "" ? null : parseFloat(nuevoMontoProyectado),
+        id_tipo_servicio: tipoServicioSeleccionado?.value || null
+      }),
+    });
 
-      if (!res.ok) throw new Error("Error actualizando objetivo");
-      alert("Objetivo actualizado correctamente");
-      setModalEditar(false);
-      buscarSeguimientos(vendedoraSeleccionada?.value || "");
-    } catch (err) {
-      alert("Error: " + err.message);
-    }
-  };
+    if (!res.ok) throw new Error("Error actualizando datos");
+    alert("Actualización exitosa");
+    setModalEditar(false);
+    buscarSeguimientos(vendedoraSeleccionada?.value || "");
+  } catch (err) {
+    alert("Error: " + err.message);
+  }
+};
+
 
 
   const clasificarSeguimiento = (venta) => {
@@ -343,6 +358,22 @@ const SeguimientosAdmin = () => {
   }, []);
 
 
+useEffect(() => {
+  const obtenerTiposServicio = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tipos-servicio`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setTiposServicio(data.map(t => ({ value: t.id_tipo_servicio, label: t.nombre })));
+    } catch (err) {
+      console.error("Error al cargar tipos de servicio:", err);
+    }
+  };
+
+  obtenerTiposServicio();
+}, []);
 
   const limpiarFiltros = () => {
     setVendedoraSeleccionada(null);
@@ -569,7 +600,10 @@ const SeguimientosAdmin = () => {
 
                       {/* Botón pequeño Editar */}
                       {!esSoloLectura && (
-                        <button className="btn-mini" onClick={() => abrirModalEditar(p.id_venta, p.objetivo)}>✏️</button>)}
+                        <button className="btn-mini" onClick={() =>
+  abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)
+}>✏️</button>
+)}
                       {!esSoloLectura && !p.abierta && p.estado_venta?.nombre === "Competencia" && (
                         <button className="btn-mini red" onClick={() => abrirModalReabrir(p.id_venta)}>REABRIR</button>
                       )}
@@ -645,11 +679,14 @@ const SeguimientosAdmin = () => {
                 )}
                 {/* 👉 Botón pequeño para editar */}
                 <button
-                  className="btn-mini"
-                  onClick={() => abrirModalEditar(p.id_venta, p.objetivo)}
-                >
-                  ✏️
-                </button>
+  className="btn-mini"
+  onClick={() =>
+    abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)
+  }
+>
+  ✏️
+</button>
+
 
 
                 {!esSoloLectura && !p.abierta && p.estado_venta?.nombre === "Competencia" && (
@@ -684,20 +721,42 @@ const SeguimientosAdmin = () => {
       </div>
       {/* 🟩 Modal para editar objetivo */}
       {modalEditar && (
-        <div className="modal-backdrop">
-          <div className="modal-content">
-            <h3>Editar Objetivo</h3>
-            <textarea
-              value={nuevoObjetivo}
-              onChange={(e) => setNuevoObjetivo(e.target.value)}
-            />
-            <div className="modal-buttons">
-              <button onClick={guardarObjetivo}>Guardar</button>
-              <button onClick={() => setModalEditar(false)}>Cancelar</button>
-            </div>
-          </div>
-        </div>
-      )}
+  <div className="modal-backdrop">
+    <div className="modal-content">
+      <h3>Editar Prospección</h3>
+
+      <label>Objetivo</label>
+      <textarea
+        value={nuevoObjetivo}
+        onChange={(e) => setNuevoObjetivo(e.target.value)}
+      />
+
+      <label>Monto Proyectado</label>
+      <input
+        type="number"
+        value={nuevoMontoProyectado}
+        onChange={(e) => setNuevoMontoProyectado(e.target.value)}
+        min="0"
+        step="0.01"
+      />
+
+      <label>Tipo de Servicio</label>
+      <Select
+        options={tiposServicio}
+        value={tipoServicioSeleccionado}
+        onChange={setTipoServicioSeleccionado}
+        isClearable
+        placeholder="Seleccionar tipo"
+      />
+
+      <div className="modal-buttons">
+        <button onClick={guardarObjetivo}>Guardar</button>
+        <button onClick={() => setModalEditar(false)}>Cancelar</button>
+      </div>
+    </div>
+  </div>
+)}
+
 
       {/* 🟥 Modal para confirmar eliminación */}
 

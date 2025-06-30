@@ -14,7 +14,7 @@ const ProspectosAdmin = () => {
 
   const [prospectos, setProspectos] = useState([]);
   const [vendedoras, setVendedoras] = useState([]);
- // const [sectores, setSectores] = useState([]);
+  // const [sectores, setSectores] = useState([]);
   const [categorias, setCategorias] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -69,7 +69,7 @@ const ProspectosAdmin = () => {
     return (
       cedulaVendedora ||
       estadoFiltro.length > 0 ||
-     // sectorFiltro ||
+      // sectorFiltro ||
       categoriaFiltro ||
       ciudadFiltro ||
       provinciaFiltro ||
@@ -387,10 +387,17 @@ const ProspectosAdmin = () => {
   };
 
   const handleCrearVenta = async () => {
-    if (!nuevoObjetivo.trim() || isNaN(nuevoMonto) || Number(nuevoMonto) <= 0) {
-      setErrorCrearVenta("Completa todos los campos con valores válidos.");
+    if (!nuevoObjetivo.trim()) {
+      setErrorCrearVenta("El objetivo es obligatorio.");
       return;
     }
+
+    const montoValido = nuevoMonto === "" ? null : Number(nuevoMonto);
+    if (montoValido !== null && (isNaN(montoValido) || montoValido < 0)) {
+      setErrorCrearVenta("El monto proyectado debe ser un número válido o dejarlo vacío.");
+      return;
+    }
+
 
     try {
       const token = localStorage.getItem("token");
@@ -404,7 +411,7 @@ const ProspectosAdmin = () => {
         body: JSON.stringify({
           id_prospecto: prospectoSeleccionado.id_prospecto,
           objetivo: nuevoObjetivo,
-          monto_proyectado: nuevoMonto,
+          monto_proyectado: nuevoMonto === "" ? null : Number(nuevoMonto),
           id_tipo_servicio: tipoServicioSeleccionado?.value || null
 
         }),
@@ -434,7 +441,7 @@ const ProspectosAdmin = () => {
       estadoFiltro,
       fechaInicio,
       fechaFin,
-     // sectorFiltro,
+      // sectorFiltro,
       categoriaFiltro,
       ciudadFiltro,
       provinciaFiltro,
@@ -447,7 +454,7 @@ const ProspectosAdmin = () => {
     estadoFiltro,
     fechaInicio,
     fechaFin,
-   // sectorFiltro,
+    // sectorFiltro,
     categoriaFiltro,
     ciudadFiltro,
     provinciaFiltro,
@@ -469,7 +476,7 @@ const ProspectosAdmin = () => {
     setProvinciaFiltro("");
     setBusquedaNombre("");
     setBusquedaInput("");
-    establecerFechasUltimos3Meses(); 
+    establecerFechasUltimos3Meses();
     setPaginaActual(1);
     localStorage.removeItem("filtros_prospectos_admin");
   };

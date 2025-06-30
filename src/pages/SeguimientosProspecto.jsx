@@ -25,10 +25,10 @@ const SeguimientosProspecto = () => {
 
   //modal nueva prospeccion
   const [mostrarModalAbrirVenta, setMostrarModalAbrirVenta] = useState(false);
-const [nuevoMonto, setNuevoMonto] = useState("");
-const [errorCrearVenta, setErrorCrearVenta] = useState("");
-const [tiposServicio, setTiposServicio] = useState([]);
-const [tipoServicioSeleccionado, setTipoServicioSeleccionado] = useState(null);
+  const [nuevoMonto, setNuevoMonto] = useState("");
+  const [errorCrearVenta, setErrorCrearVenta] = useState("");
+  const [tiposServicio, setTiposServicio] = useState([]);
+  const [tipoServicioSeleccionado, setTipoServicioSeleccionado] = useState(null);
 
 
   const rol = getRol();
@@ -39,21 +39,21 @@ const [tipoServicioSeleccionado, setTipoServicioSeleccionado] = useState(null);
   }, [filtroEstado]);
 
   useEffect(() => {
-  const obtenerTiposServicio = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tipos-servicio`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
-      setTiposServicio(data.map(t => ({ value: t.id_tipo_servicio, label: t.nombre })));
-    } catch (err) {
-      console.error("Error al cargar tipos de servicio:", err);
-    }
-  };
+    const obtenerTiposServicio = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tipos-servicio`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+        setTiposServicio(data.map(t => ({ value: t.id_tipo_servicio, label: t.nombre })));
+      } catch (err) {
+        console.error("Error al cargar tipos de servicio:", err);
+      }
+    };
 
-  obtenerTiposServicio();
-}, []);
+    obtenerTiposServicio();
+  }, []);
 
   const formatearMonto = (monto) => {
     return monto != null
@@ -106,14 +106,14 @@ const [tipoServicioSeleccionado, setTipoServicioSeleccionado] = useState(null);
       setLoading(false);
     }
   };
-  const abrirModalEditar = (id_venta, objetivoActual, montoProyectadoActual,tipoServicioActual) => {
+  const abrirModalEditar = (id_venta, objetivoActual, montoProyectadoActual, tipoServicioActual) => {
     setIdVentaSeleccionada(id_venta);
     setNuevoObjetivo(objetivoActual);
     setNuevoMontoProyectado(montoProyectadoActual ?? "");
-setTipoServicioSeleccionado(tipoServicioActual
-    ? { value: tipoServicioActual.id_tipo_servicio, label: tipoServicioActual.nombre }
-    : null
-  );
+    setTipoServicioSeleccionado(tipoServicioActual
+      ? { value: tipoServicioActual.id_tipo_servicio, label: tipoServicioActual.nombre }
+      : null
+    );
     setModalEditar(true);
   };
 
@@ -138,10 +138,10 @@ setTipoServicioSeleccionado(tipoServicioActual
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-  objetivo: nuevoObjetivo,
-  monto_proyectado: parseFloat(nuevoMontoProyectado),
-  id_tipo_servicio: tipoServicioSeleccionado?.value || null
-}),
+          objetivo: nuevoObjetivo,
+          monto_proyectado: parseFloat(nuevoMontoProyectado),
+          id_tipo_servicio: tipoServicioSeleccionado?.value || null
+        }),
 
       });
 
@@ -180,47 +180,47 @@ setTipoServicioSeleccionado(tipoServicioActual
   };
 
 
-const handleCrearVenta = async () => {
-  try {
-    const token = localStorage.getItem("token");
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ventas`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        id_prospecto,
-        objetivo: nuevoObjetivo,
-        monto_proyectado: parseFloat(nuevoMonto),
+  const handleCrearVenta = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ventas`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          id_prospecto,
+          objetivo: nuevoObjetivo,
+          monto_proyectado: parseFloat(nuevoMonto),
           id_tipo_servicio: tipoServicioSeleccionado?.value || null
 
-      }),
-    });
+        }),
+      });
 
-    if (!res.ok) throw new Error("Error creando nueva prospección");
-    alert("Venta creada correctamente");
-    setMostrarModalAbrirVenta(false);
-    setNuevoObjetivo("");
-    setNuevoMonto("");
-    setTipoServicioSeleccionado(null);
+      if (!res.ok) throw new Error("Error creando nueva prospección");
+      alert("Venta creada correctamente");
+      setMostrarModalAbrirVenta(false);
+      setNuevoObjetivo("");
+      setNuevoMonto("");
+      setTipoServicioSeleccionado(null);
 
-    buscarSeguimientos();
-  } catch (err) {
-    setErrorCrearVenta(err.message);
-  }
-};
+      buscarSeguimientos();
+    } catch (err) {
+      setErrorCrearVenta(err.message);
+    }
+  };
 
   return (
     <div className="seguimientos-container">
 
       <h1 className="title">Seguimientos del Prospecto</h1>
       <button className="btn-volver" onClick={() => navigate(-1)}>⬅️ Volver</button>
-{!esSoloLectura && (
-  <button className="btn-agregar" onClick={() => setMostrarModalAbrirVenta(true)}>
-    ➕ Nueva Prospección
-  </button>
-)}
+      {!esSoloLectura && (
+        <button className="btn-agregar" onClick={() => setMostrarModalAbrirVenta(true)}>
+          ➕ Nueva Prospección
+        </button>
+      )}
 
       <div className="filtros-container">
         <label>Filtrar por estado de prospección:</label>
@@ -263,13 +263,13 @@ const handleCrearVenta = async () => {
               <React.Fragment key={p.id_venta}>
 
                 <tr key={p.id_venta}>
-<td>
-  {p.objetivo?.toUpperCase() || "SIN OBJETIVO"}
-  <br />
-  <small style={{ color: "#555" }}>
-    {p.tipo_servicio?.nombre ? `🛠 ${p.tipo_servicio.nombre}` : "Sin tipo de servicio"}
-  </small>
-</td>
+                  <td>
+                    {p.objetivo?.toUpperCase() || "SIN OBJETIVO"}
+                    <br />
+                    <small style={{ color: "#555" }}>
+                      {p.tipo_servicio?.nombre ? `🛠 ${p.tipo_servicio.nombre}` : "Sin tipo de servicio"}
+                    </small>
+                  </td>
                   <td>{p.abierta ? "ABIERTA" : "CERRADA"}</td>
                   <td>{formatearMonto(p.monto_proyectado)}</td>
 
@@ -293,10 +293,10 @@ const handleCrearVenta = async () => {
                     >
                       📜 Ver Seguimientos
                     </button>
-                    {!esSoloLectura && rol === "admin" && (
-<button className="btn-mini" onClick={() =>
-  abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)
-}>✏️</button>
+                    {!esSoloLectura && (
+                      <button className="btn-mini" onClick={() =>
+                        abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)
+                      }>✏️</button>
                     )}
                     {!esSoloLectura && rol === "admin" && !p.abierta && p.estado_venta?.nombre === "Competencia" && (
                       <button className="btn-mini" onClick={() => abrirModalReabrir(p.id_venta)}>REABIR</button>
@@ -307,20 +307,20 @@ const handleCrearVenta = async () => {
 
                 {/* Nueva fila con la siguiente fecha y motivo */}
                 <tr className="fila-info-extra">
-                  <td colSpan="7" style={{ fontStyle: "italic", color: "#555", backgroundColor: "#c9edec" }}>
+                  <td colSpan="9" style={{ fontStyle: "italic", color: "#555", backgroundColor: "#c9edec" }}>
                     <strong>Siguiente fecha programada:</strong>{" "}
-                    {siguienteSeguimiento
-                      ? formatearFechaVisual(siguienteSeguimiento.fecha_programada)
-
-                      : "No se ha agendado un seguimiento."}
-                    {siguienteSeguimiento && (
+                    {siguienteSeguimiento ? (
                       <>
-                        {"  —  "}
+                        {formatearFechaVisual(siguienteSeguimiento.fecha_programada)}
+                        {" — "}
                         <strong>Motivo:</strong> {siguienteSeguimiento.motivo || "Sin motivo"}
                       </>
+                    ) : (
+                      "No se ha agendado un seguimiento."
                     )}
                   </td>
                 </tr>
+
               </React.Fragment>
 
             );
@@ -339,10 +339,10 @@ const handleCrearVenta = async () => {
 
           return (
             <div className="card-seguimiento" key={p.id_venta}>
-<h3>🎯 Objetivo: {p.objetivo || "No definido"}</h3>
-<p>
-  <strong>Tipo de Servicio:</strong> {p.tipo_servicio?.nombre || "Sin tipo"}
-</p>
+              <h3>🎯 Objetivo: {p.objetivo || "No definido"}</h3>
+              <p>
+                <strong>Tipo de Servicio:</strong> {p.tipo_servicio?.nombre || "Sin tipo"}
+              </p>
               <p>
                 <strong>Monto Proyectado:</strong> {formatearMonto(p.monto_proyectado)}
               </p>
@@ -368,8 +368,8 @@ const handleCrearVenta = async () => {
                 <button className="btn-ver-seguimientos" onClick={() => navigate(`/seguimientos-prospeccion/${p.id_venta}`)}>
                   📜 Ver
                 </button>
-                {!esSoloLectura && rol === "admin" && (
-                  <button className="btn-mini" onClick={() => abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado,p.tipo_servicio)}>✏️</button>
+                {!esSoloLectura && (
+                  <button className="btn-mini" onClick={() => abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)}>✏️</button>
                 )}
                 {!esSoloLectura && rol === "admin" && !p.abierta && p.estado_venta?.nombre === "Competencia" && (
                   <button className="btn-mini azul" onClick={() => abrirModalReabrir(p.id_venta)}>🔁</button>
@@ -412,13 +412,13 @@ const handleCrearVenta = async () => {
               step="0.01"
             />
             <label>Tipo de Servicio</label>
-<Select
-  options={tiposServicio}
-  value={tipoServicioSeleccionado}
-  onChange={setTipoServicioSeleccionado}
-  isClearable
-  placeholder="Seleccionar tipo"
-/>
+            <Select
+              options={tiposServicio}
+              value={tipoServicioSeleccionado}
+              onChange={setTipoServicioSeleccionado}
+              isClearable
+              placeholder="Seleccionar tipo"
+            />
 
             <div className="modal-buttons">
               <button onClick={guardarObjetivo}>Guardar</button>
@@ -453,54 +453,54 @@ const handleCrearVenta = async () => {
         </div>
       )}
 
-{mostrarModalAbrirVenta && (
-  <div className="modal-backdrop">
-    <div className="modal-content">
-      <h3>Nueva Prospección</h3>
-      <label>Objetivo de la Prospección *</label>
-      <textarea
-        value={nuevoObjetivo}
-        onChange={(e) => setNuevoObjetivo(e.target.value)}
-        placeholder="Describe el objetivo..."
-      />
+      {mostrarModalAbrirVenta && (
+        <div className="modal-backdrop">
+          <div className="modal-content">
+            <h3>Nueva Prospección</h3>
+            <label>Objetivo de la Prospección *</label>
+            <textarea
+              value={nuevoObjetivo}
+              onChange={(e) => setNuevoObjetivo(e.target.value)}
+              placeholder="Describe el objetivo..."
+            />
 
-      <label>Monto Proyectado *</label>
-<input
-  type="number"
-  value={nuevoMonto}
-  onChange={(e) => setNuevoMonto(e.target.value)}
-  placeholder="Ej: 5000"
-/>
+            <label>Monto Proyectado *</label>
+            <input
+              type="number"
+              value={nuevoMonto}
+              onChange={(e) => setNuevoMonto(e.target.value)}
+              placeholder="Ej: 5000"
+            />
 
-<label>Tipo de Servicio</label>
-<Select
-  options={tiposServicio}
-  value={tipoServicioSeleccionado}
-  onChange={setTipoServicioSeleccionado}
-  isClearable
-  placeholder="Seleccionar tipo"
-/>
+            <label>Tipo de Servicio</label>
+            <Select
+              options={tiposServicio}
+              value={tipoServicioSeleccionado}
+              onChange={setTipoServicioSeleccionado}
+              isClearable
+              placeholder="Seleccionar tipo"
+            />
 
 
-      {errorCrearVenta && <p className="error">{errorCrearVenta}</p>}
+            {errorCrearVenta && <p className="error">{errorCrearVenta}</p>}
 
-      <div className="modal-buttons">
-        <button className="btn-confirmar" onClick={handleCrearVenta}>Crear</button>
-<button
-  className="btn-cancelar"
-  onClick={() => {
-    setMostrarModalAbrirVenta(false);
-    setNuevoObjetivo("");
-    setNuevoMonto("");
-    setTipoServicioSeleccionado(null);
-  }}
->
-  Cancelar
-</button>
-      </div>
-    </div>
-  </div>
-)}
+            <div className="modal-buttons">
+              <button className="btn-confirmar" onClick={handleCrearVenta}>Crear</button>
+              <button
+                className="btn-cancelar"
+                onClick={() => {
+                  setMostrarModalAbrirVenta(false);
+                  setNuevoObjetivo("");
+                  setNuevoMonto("");
+                  setTipoServicioSeleccionado(null);
+                }}
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
 
 

@@ -221,10 +221,17 @@ const ProspectosVendedora = () => {
   };
 
   const handleCrearVenta = async () => {
-    if (!nuevoObjetivo.trim() || isNaN(nuevoMonto) || Number(nuevoMonto) <= 0) {
-      setErrorCrearVenta("Completa todos los campos con valores válidos.");
+    if (!nuevoObjetivo.trim()) {
+      setErrorCrearVenta("El objetivo es obligatorio.");
       return;
     }
+
+    const montoValido = nuevoMonto === "" ? null : Number(nuevoMonto);
+    if (montoValido !== null && (isNaN(montoValido) || montoValido < 0)) {
+      setErrorCrearVenta("El monto proyectado debe ser un número válido o dejarlo vacío.");
+      return;
+    }
+
 
     try {
       const token = localStorage.getItem("token");
@@ -238,7 +245,7 @@ const ProspectosVendedora = () => {
         body: JSON.stringify({
           id_prospecto: prospectoSeleccionado.id_prospecto,
           objetivo: nuevoObjetivo,
-          monto_proyectado: nuevoMonto,
+          monto_proyectado: nuevoMonto === "" ? null : Number(nuevoMonto),
           id_tipo_servicio: tipoServicioSeleccionado?.value || null
         }),
       });
