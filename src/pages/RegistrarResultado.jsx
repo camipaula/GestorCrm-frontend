@@ -81,14 +81,14 @@ const RegistrarResultado = () => {
 
   const guardarResultado = async () => {
     const estadoSeleccionado = estados.find(e => e.id_estado == estadoProspecto);
-    const nombreEstado = estadoSeleccionado?.nombre;
+const nombreEstado = estadoSeleccionado?.nombre.trim();
 
     if (!nombreEstado) {
       alert("Selecciona un estado válido.");
       return;
     }
 
-    const estadosFinales = ["Cierre", "Competencia"];
+    const estadosFinales = ["Cierre", "No interesado"];
     if (!estadosFinales.includes(nombreEstado)) {
       setMostrarModal(true);
       return;
@@ -212,7 +212,7 @@ const RegistrarResultado = () => {
 
       // Guardar el resultado del seguimiento actual
       const estadoSeleccionado = estados.find(e => e.id_estado == estadoProspecto);
-      const nombreEstado = estadoSeleccionado?.nombre;
+const nombreEstado = estadoSeleccionado?.nombre.trim();
 
       const resResultado = await fetch(`${import.meta.env.VITE_API_URL}/api/seguimientos/${id_seguimiento}`, {
         method: "PUT",

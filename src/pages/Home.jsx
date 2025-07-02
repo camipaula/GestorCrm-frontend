@@ -384,7 +384,7 @@ const Home = () => {
 
           <div className="dashboard-card-c">
 
-            <h3>🥧 PROSPECCIONES ABIERTAS, CERRADAS Y COMPETENCIA</h3>
+            <h3>🥧 PROSPECCIONES ABIERTAS, CERRADAS Y NO INTERESADOS</h3>
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
                 <Pie
@@ -436,7 +436,7 @@ const Home = () => {
               <p>📂 TOTALES: <strong>{dashboardData.totalVentas}</strong></p>
               <p>🔓 ABIERTAS: <strong>{dashboardData.totalVentasAbiertas}</strong></p>
               <p>✅ CERRADAS: <strong>{dashboardData.totalVentasGanadas} ({(dashboardData.porcentajeGanadas ?? 0).toFixed(1)}%)</strong></p>
-              <p>❌ COMPETENCIA: <strong>{dashboardData.totalVentasPerdidas} ({(dashboardData.porcentajePerdidas ?? 0).toFixed(1)}%)</strong></p>
+              <p>❌ NO INTERESADOS: <strong>{dashboardData.totalVentasPerdidas} ({(dashboardData.porcentajePerdidas ?? 0).toFixed(1)}%)</strong></p>
             </div>
 
             <div className="dashboard-card resumen-secundario">
@@ -633,7 +633,7 @@ const Home = () => {
           </div>
 
           <div className="dashboard-card tabla-cierres">
-            <h3>❌ PROSPECCIONES EN COMPETENCIA</h3>
+            <h3>❌ PROSPECCIONES NO INTERESADOS</h3>
             <div className="tabla-detalle-cierres">
 
               <table>

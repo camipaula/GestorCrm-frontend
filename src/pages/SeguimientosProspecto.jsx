@@ -298,7 +298,7 @@ const SeguimientosProspecto = () => {
                         abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)
                       }>✏️</button>
                     )}
-                    {!esSoloLectura && rol === "admin" && !p.abierta && p.estado_venta?.nombre === "Competencia" && (
+                    {!esSoloLectura && rol === "admin" && !p.abierta && p.estado_venta?.nombre === "No interesado" && (
                       <button className="btn-mini" onClick={() => abrirModalReabrir(p.id_venta)}>REABIR</button>
                     )}
 
@@ -371,7 +371,7 @@ const SeguimientosProspecto = () => {
                 {!esSoloLectura && (
                   <button className="btn-mini" onClick={() => abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)}>✏️</button>
                 )}
-                {!esSoloLectura && rol === "admin" && !p.abierta && p.estado_venta?.nombre === "Competencia" && (
+                {!esSoloLectura && rol === "admin" && !p.abierta && p.estado_venta?.nombre === "No interesado" && (
                   <button className="btn-mini azul" onClick={() => abrirModalReabrir(p.id_venta)}>🔁</button>
                 )}
 

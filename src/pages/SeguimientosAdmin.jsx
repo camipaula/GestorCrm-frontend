@@ -604,9 +604,10 @@ useEffect(() => {
   abrirModalEditar(p.id_venta, p.objetivo, p.monto_proyectado, p.tipo_servicio)
 }>✏️</button>
 )}
-                      {!esSoloLectura && !p.abierta && p.estado_venta?.nombre === "Competencia" && (
-                        <button className="btn-mini red" onClick={() => abrirModalReabrir(p.id_venta)}>REABRIR</button>
-                      )}
+                      {!esSoloLectura && !p.abierta && p.estado_venta?.nombre?.toLowerCase() === "no interesado" && (
+  <button className="btn-mini red" onClick={() => abrirModalReabrir(p.id_venta)}>REABRIR</button>
+)}
+
 
 
                     </td>
@@ -689,9 +690,10 @@ useEffect(() => {
 
 
 
-                {!esSoloLectura && !p.abierta && p.estado_venta?.nombre === "Competencia" && (
-                  <button className="btn-mini red" onClick={() => abrirModalReabrir(p.id_venta)}>Reabrir</button>
-                )}
+                {!esSoloLectura && !p.abierta && p.estado_venta?.nombre?.toLowerCase() === "no interesado" && (
+  <button className="btn-mini red" onClick={() => abrirModalReabrir(p.id_venta)}>REABRIR</button>
+)}
+
 
                 <p style={{ fontStyle: "italic", marginTop: "10px" }}>
                   <strong>Siguiente fecha programada:</strong>{" "}

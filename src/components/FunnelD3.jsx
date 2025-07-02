@@ -7,18 +7,17 @@ const ordenFases = [
   "En Planeación",
   "Cierre",
   "Reabierto",
-  "Competencia",
+  "No interesado",
 ];
 
+const coloresPorEstado = {
+  "Nuevo": "#4caf50",          // verde
+  "En Planeación": "#03a9f4",  // celeste
+  "Cierre": "#f44336",         // rojo
+  "Reabierto": "#fdd835",      // amarillo
+  "No interesado": "#ff9800",  // rojo
+};
 
-const colores = [
-  "#4caf50",  // Nuevo (verde)
-  "#03a9f4",  // En Planeación (celeste)
-  "#f44336",  // Cierre (rojo)
-  "#fdd835",  // Reabierto (amarillo)
-    "#f44336",  // Competencia (rojo)
-
-];
 
 const FunnelD3 = ({ data }) => {
   const containerRef = useRef(null);
@@ -33,9 +32,11 @@ const FunnelD3 = ({ data }) => {
     );
 
     const funnelData = dataOrdenada.map((item) => [
-  item.estado.toUpperCase(), // Solo el nombre de la fase
-  item.cantidad,
-]);
+      item.estado.toUpperCase(),
+      item.cantidad,
+      coloresPorEstado[item.estado] || "#ccc", // color por estado
+    ]);
+
 
 
     const chart = new D3Funnel(containerRef.current);
@@ -51,15 +52,12 @@ const FunnelD3 = ({ data }) => {
       block: {
         dynamicHeight: true,
         minHeight: 15,
-        fill: {
-          scale: colores,
-        },
       },
       label: {
-  fontSize: "14px",
-  color: "#000",
-  format: (label) => label, // Solo muestra el texto original, o sea "NUEVO"
-},
+        fontSize: "14px",
+        color: "#000",
+        format: (label) => label, // Solo muestra el texto original, o sea "NUEVO"
+      },
 
     });
   }, [data]);
@@ -91,7 +89,7 @@ const FunnelD3 = ({ data }) => {
               style={{
                 width: "12px",
                 height: "12px",
-                backgroundColor: colores[ordenFases.indexOf(fase.estado)],
+                backgroundColor: coloresPorEstado[fase.estado] || "#ccc",
                 marginRight: "8px",
                 borderRadius: "2px",
               }}
